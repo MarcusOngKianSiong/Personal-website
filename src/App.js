@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import Front_page from './pages/front-page/front-page'
 import About from './pages/about'
-import systemProjects from './pages/system_projects/system_projects'
+import SystemProjects from './pages/system_projects/system_projects'
 import Contact from './pages/contact_me'
 import Login from './pages/login'
 import Tabs from './assets/tabsLogo.svg'
@@ -41,6 +41,9 @@ function App() {
     }
     if(pageTarget === "Front Page"){
       setCurrentDisplay(<Front_page/>)
+    }
+    if(pageTarget === "System Projects"){
+      setCurrentDisplay(<SystemProjects/>)
     }
   }
 
