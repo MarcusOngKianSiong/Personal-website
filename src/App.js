@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 
 function App() {
-    
+  
   const [currentDisplay,setCurrentDisplay] = useState(<Front_page/>)
   const [sideBarStyle,setSideBarStyle] = useState(null)
   const [tabStyle,setTabStyle] = useState(null)

@@ -1,8 +1,29 @@
-import React from "react";
+import React,{useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from './assets/card'
+import { useState } from 'react';
 
 export default function Front_page(){
+
+    const [test,setTest] = useState(null)
+
+    const testElasticBeanStalk = async ()=>{
+        await fetch('http://testelasticbeanstalkwithexpress-dev.ap-southeast-1.elasticbeanstalk.com/')
+        .then(res=>{
+            return res.text()
+        })
+        .then(res=>{
+            setTest(res)
+        })
+        
+    }
+
+    
+
+    useEffect(()=>{
+        testElasticBeanStalk()
+    },[])
+
     return (
         
         <div className="d-flex flex-column">
@@ -21,7 +42,7 @@ export default function Front_page(){
                 <h2>Goal</h2>
                 <h4>To conceptualize, build, and own the systems that the world runs on</h4>
                 <div>
-                    
+                    {test}
                 </div>      
             </div>
             
