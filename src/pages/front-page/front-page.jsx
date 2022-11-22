@@ -8,7 +8,7 @@ export default function Front_page(){
     const [test,setTest] = useState(null)
 
     const testElasticBeanStalk = async ()=>{
-        await fetch('http://testelasticbeanstalkwithexpress-dev.ap-southeast-1.elasticbeanstalk.com/')
+        await fetch('https://q31t1rpyw3.execute-api.ap-southeast-1.amazonaws.com/Test')
         .then(res=>{
             return res.text()
         })
