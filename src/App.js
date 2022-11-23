@@ -4,16 +4,18 @@ import Front_page from './pages/front-page/front-page'
 import About from './pages/about'
 import SystemProjects from './pages/system_projects/system_projects'
 import Contact from './pages/contact_me'
+import ControlPanel from './pages/logged_in_pages/control_panel'
 import Login from './pages/login'
 import Tabs from './assets/tabsLogo.svg'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
   
   const [currentDisplay,setCurrentDisplay] = useState(<Front_page/>)
   const [sideBarStyle,setSideBarStyle] = useState(null)
   const [tabStyle,setTabStyle] = useState(null)
+  const [loginOrControlPanel,setLoginOrControlPanel] = useState(null)
 
   const openTabs = () => {
 
@@ -34,10 +36,21 @@ function App() {
     setTabStyle({display: 'none'})
   }
   
+  const logout = () => {
+    sessionStorage.setItem('token','')
+    setLoginOrControlPanel("Login")
+    setCurrentDisplay(<Login/>)
+  }
+
+  const login = () => {
+    setLoginOrControlPanel("Control Panel")
+    setCurrentDisplay(<ControlPanel logout={logout}/>)
+  }
+
   const changeTabs = (e) => {
     const pageTarget = e.target.textContent
     if (pageTarget === "Login"){
-      setCurrentDisplay(<Login/>)
+      setCurrentDisplay(<Login login={login}/>)
     }
     if(pageTarget === "Front Page"){
       setCurrentDisplay(<Front_page/>)
@@ -45,9 +58,19 @@ function App() {
     if(pageTarget === "System Projects"){
       setCurrentDisplay(<SystemProjects/>)
     }
+    if(pageTarget === "Control Panel"){
+      setCurrentDisplay(<ControlPanel logout={logout}/>)
+    }
   }
 
-
+  useEffect(()=>{
+    //Sidebar: If no token, login, if there is a token, control panel
+    if(sessionStorage.getItem('token')){
+      setLoginOrControlPanel("Control Panel")
+    }else{
+      setLoginOrControlPanel("Login")
+    }
+  },[])
 
   return (
     <div className="App d-flex">
@@ -57,7 +80,7 @@ function App() {
         <p className="tabs m-4" style={tabStyle} onClick={changeTabs}>System Projects</p>
         <p className="tabs m-4" style={tabStyle} onClick={changeTabs}>About</p>
         <p className="tabs m-4" style={tabStyle} onClick={changeTabs}>Contact Me</p>
-        <p className="tabs m-4" style={tabStyle} onClick={changeTabs}>Login</p>
+        <p className="tabs m-4" style={tabStyle} onClick={changeTabs}>{loginOrControlPanel}</p>
       </div>
       <div className='p-5 position-absolute end-0 d-flex align-items-center justify-content-end' style={{ height: '13vh'}} id="header">
         <p onClick={openTabs}>

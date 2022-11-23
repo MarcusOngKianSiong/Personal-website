@@ -4,16 +4,33 @@ import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import query from '../assets/functions/query.js'
 
-export default function Login(){
+export default function Login(tools){
 
     const [loginDetails,setLoginDetails] = useState({
         email: "",
         password: ""
     })
 
-    const handleSubmit = () => {
-        const query = query.query(loginDetails);
-        console.log(query);
+    const handleSubmit = async () => {
+    
+        const linkQuery = query.query(loginDetails);
+        console.log(linkQuery)
+        await fetch('https://ec1b21dhj7.execute-api.ap-southeast-1.amazonaws.com/systemDesignAndDevelopment'+linkQuery,{method: 'post'})
+        .then(res=>{
+            return res.json()
+        })
+        .then(res=>{
+            if(res.outcome){
+                console.log("SUCCESS: ",res)
+                sessionStorage.setItem('token',res.JWTtoken)
+                tools.login()
+            }else{
+                console.log("ERROR: ",res.reason)
+            }
+        })
+        .catch(err=>{
+            console.log("ERROR: Unable to send request to back-end.")
+        })
     }
     
     const handleChange = (e) => {
@@ -27,6 +44,7 @@ export default function Login(){
 
     return (
         <div className="d-flex align-items-center justify-content-center w-50 h-100">
+            
             <Form className=" w-50" onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
@@ -40,7 +58,7 @@ export default function Login(){
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Password" value={loginDetails.password} onChange={handleChange}/>
                 </Form.Group>
-                <Button variant="primary" type="submit">
+                <Button variant="primary" type="button" onClick={handleSubmit}>
                     Submit
                 </Button>
             </Form>
