@@ -28,9 +28,7 @@ export default function Login(tools){
                 console.log("ERROR: ",res.reason)
             }
         })
-        .catch(err=>{
-            console.log("ERROR: Unable to send request to back-end.")
-        })
+        
     }
     
     const handleChange = (e) => {

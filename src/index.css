@@ -23,7 +23,11 @@ code {
   width: 0;
   transition: 0.5s;
 }
-
+#controlPanelSideBar{
+  
+  max-width: 15vw;
+  transition: 0.5s;
+}
 #projectSideBar{
   transition: 0.5s;
 }

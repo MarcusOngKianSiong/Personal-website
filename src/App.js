@@ -12,11 +12,11 @@ import { useEffect, useState } from 'react';
 
 function App() {
   
-  const [currentDisplay,setCurrentDisplay] = useState(<Front_page/>)
-  const [sideBarStyle,setSideBarStyle] = useState(null)
-  const [tabStyle,setTabStyle] = useState(null)
-  const [loginOrControlPanel,setLoginOrControlPanel] = useState(null)
-
+  const [currentDisplay,setCurrentDisplay] = useState(<Front_page/>);
+  const [sideBarStyle,setSideBarStyle] = useState(null);
+  const [tabStyle,setTabStyle] = useState(null);
+  const [loginOrControlPanel,setLoginOrControlPanel] = useState(null);
+  
   const openTabs = () => {
 
      setSideBarStyle({
@@ -39,7 +39,7 @@ function App() {
   const logout = () => {
     sessionStorage.setItem('token','')
     setLoginOrControlPanel("Login")
-    setCurrentDisplay(<Login/>)
+    setCurrentDisplay(<Login login={login}/>)
   }
 
   const login = () => {
@@ -71,7 +71,7 @@ function App() {
       setLoginOrControlPanel("Login")
     }
   },[])
-
+  
   return (
     <div className="App d-flex">
       <div className='d-flex flex-column text-white bg-dark position-absolute h-100 end-0' style={sideBarStyle} id="tabs">
