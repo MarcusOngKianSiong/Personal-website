@@ -1,5 +1,7 @@
 import React,{useState} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import DesignComponent from './sections/design/designComponent'
+
 
 export default function ProjectSection(tools){
     console.log(tools.projectComponentTarget)
@@ -37,7 +39,9 @@ export default function ProjectSection(tools){
         <div className="d-flex flex-column w-100 h-100 p-2">
             <div id="Design"  className="d-flex flex-column">
                 <p id="Design" onClick={openOrClose} className="border-bottom  w-100 d-flex">{openOrCloseSymbol.Design}</p>
-                <div id="Design" style={{display: displaySection.Design}}>Something</div>
+                <div id="Design" style={{display: displaySection.Design}}>
+                    <DesignComponent/>
+                </div>
             </div>
             <div id="Development"  className="d-flex flex-column">
                 <p id="Development" onClick={openOrClose} className="border-bottom  w-100 d-flex">{openOrCloseSymbol.Development}</p>
