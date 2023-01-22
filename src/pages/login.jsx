@@ -56,6 +56,10 @@ export default function Login(tools){
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Password" value={loginDetails.password} onChange={handleChange}/>
                 </Form.Group>
+
+                <p><strong>email: </strong>marcusongkiansiong@gmail.com</p>
+                <p><strong>password: </strong>123</p>
+
                 <Button variant="primary" type="button" onClick={handleSubmit}>
                     Submit
                 </Button>
